@@ -1,0 +1,103 @@
+URxvt*.scrollBar: false
+URxvt*.font: xft:xos4 Terminus:Regular:size=24
+URxvtLauncher.geometry: 50x3
+
+
+!ssh-askpass*Dialog.font: -*-anorexia-medium-*-*-*-*-*-*-*-*-*-*-*
+ssh-askpass*Dialog.font: -*-terminus-medium-*-*-*-20-*-*-*-*-*-*-*
+ssh-askpass*?.foreground:          rgb:d0/d0/d0
+ssh-askpass*?.background:          rgb:20/30/50
+ssh-askpass*background:             #203050
+ssh-askpass*foreground:             #ffffff
+ssh-askpass*topShadowColor:        rgb:90/90/90
+ssh-askpass*bottomShadowColor:     rgb:00/00/00
+ssh-askpass*borderColor:           rgb:a0/a0/a0
+ssh-askpass*shadowThickness:       0
+ssh-askpass*borderWidth:           1
+ssh-askpass*horizontalSpacing:     20
+ssh-askpass*verticalSpacing:       10
+!ssh-askpass*Button.font: -*-anorexia-medium-*-*-*-*-*-*-*-*-*-*-*
+ssh-askpass*Button.font: -*-terminus-medium-*-*-*-20-*-*-*-*-*-*-*
+ssh-askpass*Button.shadowThickness:    1
+ssh-askpass*Button.borderWidth:        0
+ssh-askpass*Button.horizontalSpacing:  50
+ssh-askpass*Button.verticalSpacing:    10
+ssh-askpass*Indicator.foreground: #00cc00
+ssh-askpass*Indicator.background: #003300
+ssh-askpass*Indicator.shadowThickness: 1
+ssh-askpass*Indicator.borderWidth:     0
+ssh-askpass*Indicator.height:      4
+ssh-askpass*Indicator.width:       17
+ssh-askpass*Indicator.horizontalSpacing:   4
+ssh-askpass*Indicator.verticalSpacing: 1
+ssh-askpass*Indicator.minimumCount:    15
+ssh-askpass*Indicator.maximumCount:    15
+ssh-askpass*defaultXResolution:        75/in
+ssh-askpass*defaultYResolution:        75/in
+ssh-askpass*xResolutionFuzz:       20/in
+ssh-askpass*yResolutionFuzz:       20/in
+
+
+!URxvt.background: rgba:4100/6900/e100/3000
+!URxvt.foreground: rgba:ffff/ffff/ffff/5000
+!URxvt.cursorColor: rgba:ff00/d700/0000/7000 
+!URxvt.cursorColor2: red
+
+!--------------------------------------------------------------
+!base16 for .Xresources
+!--------------------------------------------------------------
+
+! Base16 Default Dark
+! Scheme: Chris Kempson (http://chriskempson.com)
+
+#define base00 #181818
+#define base01 #282828
+#define base02 #383838
+#define base03 #585858
+#define base04 #b8b8b8
+#define base05 #d8d8d8
+#define base06 #e8e8e8
+#define base07 #f8f8f8
+#define base08 #ab4642
+#define base09 #dc9656
+#define base0A #f7ca88
+#define base0B #a1b56c
+#define base0C #86c1b9
+#define base0D #7cafc2
+#define base0E #ba8baf
+#define base0F #a16946
+
+*foreground:   base05
+#ifdef background_opacity
+*background:   [background_opacity]base00
+#else
+*background:   base00
+#endif
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06

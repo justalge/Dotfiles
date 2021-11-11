@@ -1,0 +1,1 @@
+efibootmgr --disk /dev/sda --part 2 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode ' cryptdevice=UUID=100be57f-ba6c-429a-91cc-01f8006f30d2:cryptroot:allow-discards root=/dev/mapper/cryptroot resume=/dev/mapper/cryptroot resume_offset=360448 rw initrd=\intel-ucode.img initrd=\initramfs-linux.img' --verbose

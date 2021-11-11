@@ -1,0 +1,18 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/mapper/cryptroot
+UUID=8d2bf96c-0bfc-4f70-8c7a-840c61aa8575	/         	ext4      	rw,relatime	0 1
+
+# /dev/sda2
+UUID=824B-3B26      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# /swapfile
+/swapfile	none	swap	defaults	0	0
+
+# kingston 64GB
+UUID=90FA0B92FA0B73AE /mnt/kingston ntfs-3g noauto,uid=1000,gid=1000,dmask=022,fmask=133 0 2
+
+# seagate 1TB
+UUID=d7e84f74-99c7-47e1-9809-f8a335cef3e6	/mnt/seagate	ext4	noauto,rw,relatime,user	0 2
