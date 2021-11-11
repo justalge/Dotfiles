@@ -137,6 +137,7 @@ augroup END
 
 " set directory with SnipMate settings
 let g:snippets_dir = "~/.vim/vim-snippets/snippets"
+let g:snipMate = { 'snippet_version' : 1 }
 
 
 " Vim-Airline settings
