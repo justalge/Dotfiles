@@ -1,5 +1,5 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible " be iMproved, required
+filetype off     " required
 
 "=====================================================
 " Vundle settings
@@ -8,46 +8,64 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'		" let Vundle manage Vundle, required
-
-"---------=== Colors ===-------------
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-
+Plugin 'gmarik/Vundle.vim'                      " let Vundle manage Vundle, required
 "---------=== Code/project navigation ===-------------
-Plugin 'scrooloose/nerdtree' 	    	" Project and file navigation
-Plugin 'majutsushi/tagbar'          	" Class/module browser
+Plugin 'scrooloose/nerdtree'                    " A tree explorer plugin for vim
+Plugin 'Shougo/unite.vim'                       " Navigation between buffers and files
+" Plugin 'majutsushi/tagbar'          	        " Class/module browser
 
 "------------------=== Other ===----------------------
-Plugin 'bling/vim-airline'   	    	" Lean & mean status/tabline for vim
-Plugin 'fisadev/FixedTaskList.vim'  	" Pending tasks list
-Plugin 'rosenfeld/conque-term'      	" Consoles as buffers
-Plugin 'tpope/vim-surround'	   	" Parentheses, brackets, quotes, XML tags, and more
+Plugin 'vim-airline/vim-airline'                " Lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline-themes'         " Themes for vim-airline
+Plugin 'rosenfeld/conque-term'                  " Consoles as buffers
+Plugin 'tpope/vim-surround'                     " Parentheses, brackets, quotes, XML tags, and more
+" Plugin 'fisadev/FixedTaskList.vim'  	        " Pending tasks list
 
 "--------------=== Snippets support ===---------------
-Plugin 'garbas/vim-snipmate'		" Snippets manager
-Plugin 'MarcWeber/vim-addon-mw-utils'	" dependencies #1
-Plugin 'tomtom/tlib_vim'		" dependencies #2
-Plugin 'honza/vim-snippets'		" snippets repo
+Plugin 'garbas/vim-snipmate'                    " Snippets manager
+Plugin 'MarcWeber/vim-addon-mw-utils'           " Dependencies #1
+Plugin 'tomtom/tlib_vim'                        " Dependencies #2
+Plugin 'honza/vim-snippets'                     " Snippets repo
 
 "---------------=== Languages support ===-------------
 
 " ---YouCompleteMe---
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_filetype_specific_completion_to_disable = {
-      \ 'gitcommit': 1,
-      \ 'python': 1
-      \}
+" Plugin 'Valloric/YouCompleteMe'
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_filetype_specific_completion_to_disable = {
+"       \ 'gitcommit': 1,
+"       \ 'python': 1
+"       \}
+
+Plugin 'scrooloose/syntastic'                   " Syntax checking plugin for Vim
+Plugin 'tpope/vim-commentary'                   " Comment stuff out
+Plugin 'mitsuhiko/vim-sparkup'                  " Sparkup (XML/jinja/htlm-django/etc.) support
+
+" --- CSS ---
+Plugin 'JulesWang/css.vim'                      " CSS syntax file
+Plugin 'groenewege/vim-less'                    " Vim syntax for LESS (dynamic CSS)
+
+" --- JavaScript ---
+Plugin 'pangloss/vim-javascript'                " Vastly improved Javascript indentation and syntax support in Vim
+
+" --- HTML ---
+Plugin 'othree/html5.vim'                       " HTML5 omnicomplete and sytnax
+Plugin 'idanarye/breeze.vim'                    " Html navigation like vim-easymotion, tag matching, tag highlighting and DOM navigation
 
 " --- Python ---
-Plugin 'klen/python-mode'	        " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
-Plugin 'davidhalter/jedi-vim' 		" Jedi-vim autocomplete plugin
-Plugin 'mitsuhiko/vim-jinja'		" Jinja support for vim
-Plugin 'mitsuhiko/vim-python-combined'  " Combined Python 2/3 for Vim
-Plugin 'szymonmaszke/vimpyter'		" View .ipynb files and start Jupyter Notebook by <leader>j
+Plugin 'davidhalter/jedi-vim'                   " Awesome Python autocompletion with VIM
+Plugin 'klen/python-mode'                       " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box
+Plugin 'mitsuhiko/vim-jinja'                    " Jinja support for vim
+Plugin 'mitsuhiko/vim-python-combined'          " Combined Python 2/3 for Vim
+Plugin 'hynek/vim-python-pep8-indent'           " PEP8 indent
+Plugin 'jmcantrell/vim-virtualenv'              " Virtualenv support in VIM
+" Plugin 'szymonmaszke/vimpyter'		" View .ipynb files and start Jupyter Notebook by <leader>j
 
-call vundle#end()            		" required
+" --- Terraform ---
+" Plugin 'hashivim/vim-terraform'                 " Terraform syntax highlight
+" Plugin 'juliosueiras/vim-terraform-completion'  " Terraform auto-completion
+
+call vundle#end() " required
 filetype on
 filetype plugin on
 filetype plugin indent on
@@ -61,254 +79,228 @@ filetype plugin indent on
 let mapleader = ","
 
 set backspace=indent,eol,start
+
+" This must happen before the syntax system is enabled
 aunmenu Help.
 aunmenu Window.
 let no_buffers_menu=1
 set mousemodel=popup
 
+" Activate a permanent ruler and add line highlightng as well as numbers.
+" Also disable the sucking pydoc preview window for the omni completion
+" and highlight current line and disable the blinking cursor.
 set ruler
 set completeopt-=preview
 set gcr=a:blinkon0
 if has("gui_running")
-  set cursorline
+    set cursorline
 endif
 set ttyfast
 
-" Enable code highlighting
+colorscheme nightly
+" set guifont=Consolas:h13
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+
+" Enable Syntax Colors
+" in GUI mode we go with fruity and Monaco 13
+" in CLI mode myterm looks better (fruity is GUI only)
 syntax on
 if has("gui_running")
-" GUI? set the colortheme and window size
-  set lines=50 columns=125
-  set background=dark
-  colorscheme solarized
-" uncomment the following lines if you want start NERDTree/TagBar when vim starts
-" autocmd vimenter * TagbarToggle
-" autocmd vimenter * NERDTree
-" autocmd vimenter * if !argc() | NERDTree | endif
-
-" wether vim on MAC?
-if has("mac")
-  set guifont=Consolas:h13
-  set fuoptions=maxvert,maxhorz
-else
-" default GUI
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 10
+    set macmeta " comment this line if you're not using Mac OS
+    set lines=50 columns=125
 endif
-else
-" wether vim in terminal?
-  colorscheme zenburn
+" special settings for vim
+if has("mac")
+    let macvim_hig_shift_movement = 1
+endif
+
+" Enable true color support if it possible (e.g. iTerm2 supports it)
+if has("termguicolors")
+    set termguicolors
 endif
 
 tab sball
 set switchbuf=useopen
 
-" switch off squeaking and blinking
-set visualbell t_vb=
-set novisualbell
+" Use system clipboard
+set clipboard=unnamedplus
 
-set enc=utf-8	     " use utf-8 as default encoding
-set ls=2             " always show statusbar
-set incsearch	     " incremental search
-set hlsearch	     " highlight search
-set nu	             " show line numbers
-set scrolloff=5	     " 5 lines below and above cursor
+" Customize the wildmenu
+set wildmenu
+set wildignore+=*.dll,*.o,*.pyc,*.bak,*.exe,*.jpg,*.jpeg,*.png,*.gif,*$py.class,*.class,*/*.dSYM/*,*.dylib
+set wildmode=list:full
 
-" switch off backups and swap files
-set nobackup 	     " no backup files
-set nowritebackup    " only in case you don't want a backup file while editing
-set noswapfile 	     " no swap files
+" Don't bell and blink
+set visualbell t_vb=    " turn off error beep/flash
+set noerrorbells        " turn off sound bell
+set enc=utf-8           " utf-8 default encoding
+set ls=2                " always show status bar
+set incsearch           " incremental search
+set hlsearch            " highlighted search results
+set nu                  " show line numbers
+set scrolloff=5         " keep some more lines for scope
+set showmatch           " show matching brackets/parenthesis
+set matchtime=0         " don't blink when matching
 
-" hide panels
-"set guioptions-=m   " menu
-set guioptions-=T    " toolbar
-"set guioptions-=r   " scrollbars
+" Swaps and backups
+if has("win32") || has("win64")
+    set dir=$TMP
+    set backupdir=$TMP
+else
+    set dir=/tmp
+    set backupdir=/tmp
+endif
 
-" settings on Tab
+" Hide some panels
+"set guioptions-=m  " remove menu bar
+set guioptions-=T   " remove toolbar
+"set guioptions-=r  " remove right-hand scroll bar
+
+" Tab Settings
 set smarttab
-set tabstop=8
+set tabstop=4
 
-" when there is more than 80 symbols printed in Ruby/Python/js/C/C++ highlight
+" Highlight characters past column 80 
 augroup vimrc_autocmds
     autocmd!
-    autocmd FileType ruby,python,javascript,c,cpp highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType ruby,python,javascript,c,cpp highlight Excess ctermbg=DarkGrey guibg=#c12a0f
     autocmd FileType ruby,python,javascript,c,cpp match Excess /\%80v.*/
     autocmd FileType ruby,python,javascript,c,cpp set nowrap
 augroup END
 
-" set directory with SnipMate settings
+" SnipMate settings
 let g:snippets_dir = "~/.vim/vim-snippets/snippets"
-
-
-" Vim-Airline settings
-set laststatus=2
-let g:airline_theme='powerlineish'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
+let g:snipMate = { 'snippet_version' : 1 }
 
 " TagBar settings
-map <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 0 " disable autofocus when tagbar invoked
+" map <F4> :TagbarToggle<CR>
+" let g:tagbar_autofocus = 0 " disable autofocus when tagbar invoked
 
-" NerdTree settings
-" start NERDTree on F3
-map <F3> :NERDTreeToggle<CR>
-"ignore files with the following extensions
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
-"make NerdTree show dotfiles
-let NERDTreeShowHidden=1
+" NERDTree settings
+nmap <F1> <nop>                 " unmap <F1> with help
+map <F1> :NERDTreeToggle<CR>    " browse the list of files in the current directory
 
 " TaskList settings
-map <F2> :TaskList<CR> 	   " show task list on F2
+" map <F2> :TaskList<CR>           " show task list on F2
+
+" Unite settings
+nnoremap <F2> :Unite buffer<CR> " browse a list of the currently opened buffers
+
+" ConqueTerm
+nnoremap <F5> :ConqueTermSplit ipython<CR> " run python-scripts at <F5>
+nnoremap <F6> :exe "ConqueTermSplit ipython " . expand("%")<CR> " and debug-mode for <F6>
+let g:ConqueTerm_StartMessages = 0
+let g:ConqueTerm_CloseOnEnd = 0
+
+" Jedi-vim
+let g:jedi#show_call_signatures = 1 " show call signatures
+let g:jedi#popup_on_dot = 1         " enable autocomplete on dot
+let g:jedi#popup_select_first = 0   " disable first select from auto-complete
+
+" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+noremap <f7> :w<CR>:SyntasticCheck<CR>
+
+" Better :sign interface symbols
+let g:syntastic_error_symbol = 'X'
+let g:syntastic_style_error_symbol = 'X'
+let g:syntastic_warning_symbol = 'x'
+let g:syntastic_style_warning_symbol = 'x'
+
+" Vim-Airline
+let g:airline_theme='powerlineish'
 
 "=====================================================
 " Python-mode settings
 "=====================================================
-" switch off code autocomplete (we use jedi-vim and YouCompleteMe instead)
+" Python-mode
+" Activate rope
+" Keys:
+" K Show python docs
+" <Ctrl-Space> Rope autocomplete
+" <Ctrl-c>g Rope goto definition
+" <Ctrl-c>d Rope show documentation
+" <Ctrl-c>f Rope find occurrences
+" <Leader>b Set, unset breakpoint (g:pymode_breakpoint enabled)
+" [[ Jump on previous class or function (normal, visual, operator modes)
+" ]] Jump on next class or function (normal, visual, operator modes)
+" [M Jump on previous class or method (normal, visual, operator modes)
+" ]M Jump on next class or method (normal, visual, operator modes)
 let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
-let g:pymode_rope_complete_on_dot = 0
 
-" docs
+" Documentation
 let g:pymode_doc = 0
 let g:pymode_doc_key = 'K'
-" code checking
+" Linting
 let g:pymode_lint = 1
-"let g:pymode_lint_checker = 'pyflakes,pep8'
+let g:pymode_lint_checkers = ['pylint', 'pep8']
+let g:pymode_lint_cwindow = 1
+let g:pymode_lint_ignore="E501,W601,C0110,C0111"
+let g:pymode_lint_write = 0
 
-"let g:pymode_lint_ignore='E501,W601,C0110'
-" check after saving
-let g:pymode_lint_write = 1
-
-" virtualenv support
+" Support virtualenv
 let g:pymode_virtualenv = 1
 
-" breakpoints
+" Enable breakpoints plugin
 let g:pymode_breakpoint = 1
 let g:pymode_breakpoint_key = '<leader>b'
 
-" syntax highlighting
+" Syntax highlighting
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
-" switch off code autofold
+" Don't autofold code
 let g:pymode_folding = 0
 
-" switch off code run (we use conque-term instead)
+" Get possibility to run Python code
 let g:pymode_run = 0
 
-" Disable choose first function/method at autocomplete
-let g:jedi#popup_select_first = 0
+" Other options
+let g:pymode_options_colorcolumn = 0
+if has("gui_running")
+    let g:airline_powerline_fonts = 1
+else
+    let g:airline_powerline_fonts = 0
+endif
 
 "=====================================================
 " User hotkeys
 "=====================================================
-" ConqueTerm
-" start interpreter on F5
-nnoremap <F5> :ConqueTermSplit ipython<CR>
-" start debug-mode on <F6>
-nnoremap <F6> :exe "ConqueTermSplit ipython " . expand("%")<CR>
-let g:ConqueTerm_StartMessages = 0
-let g:ConqueTerm_CloseOnEnd = 0
-" PEP8 code checking via 'p8'
-autocmd FileType python map <buffer> p8 :PymodeLint<CR>
+" Easier moving of code blocks
+vnoremap < <gv " Shift+> keys
+vnoremap > >gv " Shift+< keys
 
-" autocomplete via <Ctrl+Space>
-inoremap <C-space> <C-x><C-o>
+" Backspace in Visual mode deletes selection
+vnoremap <BS> d
 
-" syntax switching
-nnoremap <leader>Th :set ft=htmljinja<CR>
-nnoremap <leader>Tp :set ft=python<CR>
-nnoremap <leader>Tj :set ft=javascript<CR>
-nnoremap <leader>Tc :set ft=css<CR>
-nnoremap <leader>Td :set ft=django<CR>
+" CTRL-Z is Undo
+" noremap <C-z> u
+" inoremap <C-z> <C-O>u
 
-"=====================================================
-" Languages support
-"=====================================================
+" CTRL-Y is Redo
+" noremap <C-y> <C-R> 
+" inoremap <C-y> <C-O><C-R>
 
-" --- Python ---
-"autocmd FileType python set completeopt-=preview " uncomment if you don't want jedi-vim show docs on method/class
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
-\ formatoptions+=croq softtabstop=4 smartindent
-\ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
-autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+" CTRL-A is Select all
+noremap <C-a> gggH<C-O>G
+inoremap <C-a> <C-O>gg<C-O>gH<C-O>G
+cnoremap <C-a> <C-C>gggH<C-O>G
+onoremap <C-a> <C-C>gggH<C-O>G
+snoremap <C-a> <C-C>gggH<C-O>G
+xnoremap <C-a> <C-C>ggVG
 
-" --- JavaScript ---
-let javascript_enable_domhtmlcss=1
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+" CTRL-S is Quicksave command
+noremap <C-s> :update<CR>
+vnoremap <C-s> <C-C>:update<CR>
+inoremap <C-s> <C-O>:update<CR>
 
-" --- HTML ---
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-
-" --- template language support (SGML / XML too) ---
-autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
-autocmd bufnewfile,bufread *.rhtml setlocal ft=eruby
-autocmd BufNewFile,BufRead *.mako setlocal ft=mako
-autocmd BufNewFile,BufRead *.tmpl setlocal ft=htmljinja
-autocmd BufNewFile,BufRead *.py_tmpl setlocal ft=python
-let html_no_rendering=1
-let g:closetag_default_xml=1
-let g:sparkupNextMapping='<c-l>'
-autocmd FileType html,htmldjango,htmljinja,eruby,mako let b:closetag_html_style=1
-autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako source ~/.vim/scripts/closetag.vim
-
-" --- CSS ---
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-
-
-
-
-
-
-"split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-"changing split sizes
-nnoremap <Up> <C-W><kMinus>
-nnoremap <Down> <C-W><kPlus>
-nnoremap <Right> <C-W>>
-nnoremap <Left> <C-W><
-nnoremap = <C-W>=
-nnoremap _ <C-W>_
-nnoremap <Bar> <C-W>\|
-
-"mappings for buffers
+" Settings for buffers
 " Move to the previous buffer with "gp"
 nnoremap gp :bp<CR>
 " Move to the next buffer with "gn"
@@ -322,7 +314,7 @@ nnoremap gq :bd!<CR>
 " Close partiqular buffer
 nnoremap gd :bd!
 
-"mappings for switching tabs
+" Settings for switching tabs
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
@@ -334,13 +326,97 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-" vimpyter bindings
-autocmd Filetype ipynb nmap <silent><Leader>c :VimpyterInsertPythonBlock<CR>
-autocmd Filetype ipynb nmap <silent><Leader>j :VimpyterStartJupyter<CR>
-autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
+" Easier split navigations
+nnoremap <silent> <C-h> <c-w>h  " move to the right subwindows, CTRL-j
+nnoremap <silent> <C-l> <c-w>l  " move to the upper subwindow, CTRL-i
+nnoremap <silent> <C-k> <c-w>k  " move to the lower subwindow, CTRL-k
+nnoremap <silent> <C-j> <c-w>j  " move to the left subwindow, CTRL-l
 
-" copy/paste clipboard bindings
+" Split managment
+map <silent> <A-s> :split<CR>   " Split horizontal, ALT-s
+map <silent> <A-v> :vsplit<CR>  " Split vertical, ALV-v
+
+" Easier change size for splitted window
+map <silent> <Right> <C-w>>  " Increase size of the vertical split, ALT-j
+map <silent> <Down> <C-W>+  " Increase size of the horizontal split, ALT-i
+map <silent> <Up> <C-W>-  " Decrease size of the horizontal split, ALT-k
+map <silent> <Left> <C-w><  " Decrease size of the vertical split, ALT-l
+
+" Activate autocomplete at <Ctrl+Space>
+inoremap <C-space> <C-x><C-o>
+
+" Syntax switching
+" nnoremap <leader>Th :set ft=htmljinja<CR>
+" nnoremap <leader>Tp :set ft=python<CR>
+" nnoremap <leader>Tj :set ft=javascript<CR>
+" nnoremap <leader>Tc :set ft=css<CR>
+" nnoremap <leader>Td :set ft=django<CR>
+
+" Python code check on PEP8
+autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
+
+" Copy/paste clipboard bindings
 noremap <leader>y "+y
 noremap <leader>p "+p
 noremap <leader>d "+d
-noremap <leader>dd "+dd
+
+" Vimpyter bindings
+" autocmd Filetype ipynb nmap <silent><Leader>c :VimpyterInsertPythonBlock<CR>
+" autocmd Filetype ipynb nmap <silent><Leader>j :VimpyterStartJupyter<CR>
+" autocmd Filetype ipynb nmap <silent><Leader>n :VimpyterStartNteract<CR>
+
+"=====================================================
+" Languages support
+"=====================================================
+" --- C/C++/C# ---
+autocmd FileType c setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType cs setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType c setlocal commentstring=/*\ %s\ */
+autocmd FileType cpp,cs setlocal commentstring=//\ %s
+let c_no_curly_error=1
+let g:syntastic_cpp_include_dirs = ['include', '../include']
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_c_include_dirs = ['include', '../include']
+let g:syntastic_c_compiler = 'clang'
+
+" --- CSS ---
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType css setlocal commentstring=/*\ %s\ */
+
+" --- JavaScript ---
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal commentstring=//\ %s
+autocmd FileType javascript let b:javascript_fold = 0
+let javascript_enable_domhtmlcss=1
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_jshint_args='--config ~/.vim/extern-cfg/jshint.json'
+
+" --- HTML ---
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType html setlocal commentstring=<!--\ %s\ -->
+
+" --- Python ---
+let python_highlight_all=1
+let python_highlight_exceptions=0
+let python_highlight_builtins=0
+let python_slow_sync=1
+autocmd FileType python setlocal completeopt-=preview
+autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8
+\ formatoptions+=croq softtabstop=4 smartindent
+\ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+let g:syntastic_python_checkers = ['flake8', 'python']
+let g:syntastic_python_flake8_args='--ignore=E121,E128,E711,E301,E261,E241,E124,E126,E721
+\ --max-line-length=80'
+
+" --- Terraform ---
+" let g:syntastic_terraform_tffilter_plan = 1
+" let g:terraform_completion_keys = 0
+" let g:terraform_registry_module_completion = 0
+
+" --- Vim ---
+autocmd FileType vim setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
