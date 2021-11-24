@@ -9,6 +9,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'                      " let Vundle manage Vundle, required
+
+"---------=== Colors ===-------------
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
 "---------=== Code/project navigation ===-------------
 Plugin 'scrooloose/nerdtree'                    " A tree explorer plugin for vim
 Plugin 'Shougo/unite.vim'                       " Navigation between buffers and files
@@ -97,9 +102,6 @@ if has("gui_running")
 endif
 set ttyfast
 
-colorscheme nightly
-" set guifont=Consolas:h13
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 
 " Enable Syntax Colors
 " in GUI mode we go with fruity and Monaco 13
@@ -108,16 +110,28 @@ syntax on
 if has("gui_running")
     set macmeta " comment this line if you're not using Mac OS
     set lines=50 columns=125
-endif
-" special settings for vim
-if has("mac")
-    let macvim_hig_shift_movement = 1
+    set background=dark
+    colorscheme solarized
+
+    " wether vim on MAC?
+    if has("mac")
+        set guifont=Consolas:h13
+        set fuoptions=maxvert,maxhorz
+        let macvim_hig_shift_movement = 1
+    else
+    " default GUI
+        set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
+    endif
+else
+" wether vim in terminal?
+    colorscheme zenburn
 endif
 
+
 " Enable true color support if it possible (e.g. iTerm2 supports it)
-if has("termguicolors")
-    set termguicolors
-endif
+" if has("termguicolors")
+"     set termguicolors
+" endif
 
 tab sball
 set switchbuf=useopen
@@ -279,9 +293,10 @@ vnoremap > >gv " Shift+< keys
 " Backspace in Visual mode deletes selection
 vnoremap <BS> d
 
-" CTRL-Z is Undo
-" noremap <C-z> u
-" inoremap <C-z> <C-O>u
+" CTRL-E is Undo
+noremap <C-e> u
+inoremap <C-e> <C-O>u
+noremap u 1
 
 " CTRL-Y is Redo
 " noremap <C-y> <C-R> 
@@ -313,7 +328,6 @@ nnoremap gb :ls<CR>:b
 nnoremap gq :bd!<CR>
 " Close partiqular buffer
 nnoremap gd :bd!
-
 " Settings for switching tabs
 noremap <leader>1 1gt
 noremap <leader>2 2gt
@@ -325,7 +339,7 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
-
+ 
 " Easier split navigations
 nnoremap <silent> <C-h> <c-w>h  " move to the right subwindows, CTRL-j
 nnoremap <silent> <C-l> <c-w>l  " move to the upper subwindow, CTRL-i
@@ -343,7 +357,7 @@ map <silent> <Up> <C-W>-  " Decrease size of the horizontal split, ALT-k
 map <silent> <Left> <C-w><  " Decrease size of the vertical split, ALT-l
 
 " Activate autocomplete at <Ctrl+Space>
-inoremap <C-space> <C-x><C-o>
+inoremap <S-Tab> <C-x><C-o>
 
 " Syntax switching
 " nnoremap <leader>Th :set ft=htmljinja<CR>
@@ -358,6 +372,7 @@ autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
 " Copy/paste clipboard bindings
 noremap <leader>y "+y
 noremap <leader>p "+p
+noremap p ""p
 noremap <leader>d "+d
 
 " Vimpyter bindings
